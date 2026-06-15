@@ -30,6 +30,24 @@ playground.xcworkspace
 # .swiftpm
 
 .build/
+build/
+DerivedData/
+.swiftpm/
+
+# Local secrets and environment overrides
+.env
+.env.*
+!.env.example
+*.xcconfig.local
+Secrets.xcconfig
+
+# Release artifacts
+dist/
+*.dmg
+*.pkg
+
+# macOS
+.DS_Store
 
 # CocoaPods
 #
