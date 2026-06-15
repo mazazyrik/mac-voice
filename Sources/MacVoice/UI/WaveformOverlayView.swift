@@ -7,8 +7,13 @@ struct WaveformOverlayView: View {
         HStack(spacing: 14) {
             statusIcon
             VStack(alignment: .leading, spacing: 4) {
-                Text(title)
-                    .font(.system(size: 14, weight: .semibold, design: .rounded))
+                HStack(spacing: 8) {
+                    Text(title)
+                        .font(.system(size: 14, weight: .semibold, design: .rounded))
+                    if case .recording(let startedAt) = controller.phase {
+                        recordingTimer(startedAt: startedAt)
+                    }
+                }
                 if case .failure(let message, _) = controller.phase {
                     Text(message)
                         .font(.system(size: 11))
@@ -21,6 +26,8 @@ struct WaveformOverlayView: View {
                         .lineLimit(1)
                 } else if case .recording = controller.phase {
                     waveform
+                } else if case .transcribing = controller.phase {
+                    transcribingIndicator
                 }
             }
             Spacer(minLength: 4)
@@ -29,13 +36,23 @@ struct WaveformOverlayView: View {
         .foregroundStyle(.white)
         .padding(.horizontal, 17)
         .frame(width: 410, height: 78)
-        .background(Color(red: 0.055, green: 0.05, blue: 0.09).opacity(0.94))
+        .background {
+            PanelPhaseBackground(phase: controller.phase)
+        }
         .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
         .overlay {
             RoundedRectangle(cornerRadius: 24, style: .continuous)
                 .stroke(Color.white.opacity(0.15), lineWidth: 1)
         }
         .shadow(color: .black.opacity(0.34), radius: 16, y: 8)
+    }
+
+    private func recordingTimer(startedAt: Date) -> some View {
+        TimelineView(.periodic(from: startedAt, by: 1)) { context in
+            Text(formatDuration(context.date.timeIntervalSince(startedAt)))
+                .font(.system(size: 12, weight: .medium, design: .monospaced))
+                .foregroundStyle(.white.opacity(0.72))
+        }
     }
 
     private var statusIcon: some View {
@@ -59,6 +76,27 @@ struct WaveformOverlayView: View {
             }
         }
         .frame(height: 23)
+    }
+
+    private var transcribingIndicator: some View {
+        TimelineView(.animation) { timeline in
+            let t = timeline.date.timeIntervalSinceReferenceDate
+            HStack(spacing: 4) {
+                ForEach(0..<12, id: \.self) { index in
+                    let wave = 0.35 + 0.65 * abs(sin(t * 2.8 + Double(index) * 0.55))
+                    Capsule()
+                        .fill(
+                            LinearGradient(
+                                colors: [MacVoiceTheme.cyan, MacVoiceTheme.accent],
+                                startPoint: .bottom,
+                                endPoint: .top
+                            )
+                        )
+                        .frame(width: 3, height: 6 + 14 * wave)
+                }
+            }
+            .frame(height: 23)
+        }
     }
 
     @ViewBuilder
@@ -107,6 +145,13 @@ struct WaveformOverlayView: View {
         default:
             EmptyView()
         }
+    }
+
+    private func formatDuration(_ interval: TimeInterval) -> String {
+        let total = max(0, Int(interval.rounded(.down)))
+        let minutes = total / 60
+        let seconds = total % 60
+        return String(format: "%02d:%02d", minutes, seconds)
     }
 
     private var title: String {

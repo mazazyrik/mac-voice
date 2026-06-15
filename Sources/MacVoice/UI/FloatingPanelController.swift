@@ -10,6 +10,8 @@ final class FloatingPanelController {
     private var hostingController: NSHostingController<WaveformOverlayView>?
     private var cancellables = Set<AnyCancellable>()
     private var hideTask: Task<Void, Never>?
+    private var globalEscapeMonitor: Any?
+    private var localEscapeMonitor: Any?
 
     init(controller: VoiceSessionController, settings: AppSettings) {
         self.controller = controller
@@ -55,6 +57,7 @@ final class FloatingPanelController {
         hideTask?.cancel()
         switch phase {
         case .idle:
+            removeEscapeMonitors()
             panel.orderOut(nil)
         case .success:
             show()
@@ -77,5 +80,50 @@ final class FloatingPanelController {
         )
         panel.setFrameOrigin(origin)
         panel.orderFrontRegardless()
+        installEscapeMonitors()
+    }
+
+    private func installEscapeMonitors() {
+        removeEscapeMonitors()
+        globalEscapeMonitor = NSEvent.addGlobalMonitorForEvents(matching: .keyDown) { [weak self] event in
+            guard event.keyCode == 53 else { return }
+            Task { @MainActor in
+                self?.handleEscape()
+            }
+        }
+        localEscapeMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown) { [weak self] event in
+            guard event.keyCode == 53 else { return event }
+            Task { @MainActor in
+                self?.handleEscape()
+            }
+            return nil
+        }
+    }
+
+    private func removeEscapeMonitors() {
+        if let globalEscapeMonitor {
+            NSEvent.removeMonitor(globalEscapeMonitor)
+            self.globalEscapeMonitor = nil
+        }
+        if let localEscapeMonitor {
+            NSEvent.removeMonitor(localEscapeMonitor)
+            self.localEscapeMonitor = nil
+        }
+    }
+
+    private func handleEscape() {
+        switch controller.phase {
+        case .recording, .transcribing:
+            controller.cancelAndReset()
+        case .success:
+            hideTask?.cancel()
+            controller.resetPresentation()
+        case .failure(_, let canRetry) where canRetry:
+            controller.discardFailedRecording()
+        case .failure:
+            controller.resetPresentation()
+        case .idle:
+            break
+        }
     }
 }
