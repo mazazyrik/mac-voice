@@ -150,4 +150,4 @@ issues should follow [SECURITY.md](SECURITY.md).
 
 ## License
 
-MIT © 2026 Nikita.
+MIT © 2026 mazazyrik
