@@ -1,0 +1,71 @@
+<svg width="1600" height="1000" viewBox="0 0 1600 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="accent" x1="400" y1="150" x2="1170" y2="820" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7359FF"/>
+      <stop offset="0.52" stop-color="#E159C8"/>
+      <stop offset="1" stop-color="#35C6EF"/>
+    </linearGradient>
+    <filter id="blurA" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="95"/>
+    </filter>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="180%">
+      <feDropShadow dx="0" dy="24" stdDeviation="30" flood-color="#000" flood-opacity=".46"/>
+    </filter>
+  </defs>
+  <rect width="1600" height="1000" fill="#080912"/>
+  <circle cx="265" cy="170" r="275" fill="#7254FF" fill-opacity=".23" filter="url(#blurA)"/>
+  <circle cx="1340" cy="850" r="250" fill="#37C6EE" fill-opacity=".16" filter="url(#blurA)"/>
+
+  <g filter="url(#shadow)">
+    <rect x="160" y="78" width="1280" height="844" rx="34" fill="#10111C"/>
+    <rect x="160.5" y="78.5" width="1279" height="843" rx="33.5" stroke="white" stroke-opacity=".13"/>
+  </g>
+
+  <circle cx="205" cy="116" r="7" fill="#FF655D"/>
+  <circle cx="229" cy="116" r="7" fill="#F5BF4F"/>
+  <circle cx="253" cy="116" r="7" fill="#5BCB60"/>
+  <rect x="184" y="151" width="1232" height="1" fill="white" fill-opacity=".08"/>
+
+  <rect x="205" y="174" width="42" height="42" rx="21" fill="url(#accent)"/>
+  <path d="M218 197V191M225 202V186M232 205V183M239 201V187" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+  <text x="263" y="204" fill="white" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="24" font-weight="700">MacVoice</text>
+  <rect x="1340" y="178" width="38" height="38" rx="19" fill="white" fill-opacity=".08"/>
+  <path d="M1359 189V193M1359 201V205M1348 197H1352M1366 197H1370" stroke="white" stroke-opacity=".8" stroke-width="2.4" stroke-linecap="round"/>
+
+  <rect x="205" y="242" width="1173" height="384" rx="30" fill="white" fill-opacity=".065"/>
+  <rect x="205.5" y="242.5" width="1172" height="383" rx="29.5" stroke="white" stroke-opacity=".11"/>
+  <circle cx="792" cy="390" r="86" fill="#7557FF" fill-opacity=".22" filter="url(#blurA)"/>
+  <circle cx="792" cy="390" r="72" fill="url(#accent)"/>
+  <path d="M779 371C779 363 785 357 793 357C801 357 807 363 807 371V396C807 404 801 410 793 410C785 410 779 404 779 396V371Z" fill="white"/>
+  <path d="M768 389V395C768 409 779 420 793 420C807 420 818 409 818 395V389M793 420V431M782 431H804" stroke="white" stroke-width="5" stroke-linecap="round"/>
+  <text x="792" y="505" text-anchor="middle" fill="white" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="34" font-weight="750">Готов к диктовке</text>
+  <text x="792" y="540" text-anchor="middle" fill="white" fill-opacity=".57" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="18">Нажмите горячую клавишу или кнопку микрофона</text>
+  <rect x="728" y="563" width="128" height="34" rx="17" fill="white" fill-opacity=".07"/>
+  <text x="792" y="586" text-anchor="middle" fill="white" fill-opacity=".72" font-family="Menlo, monospace" font-size="16" font-weight="700">⌥ Space</text>
+
+  <text x="205" y="681" fill="white" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="23" font-weight="700">Недавние диктовки</text>
+  <rect x="205" y="709" width="1173" height="82" rx="20" fill="white" fill-opacity=".052"/>
+  <circle cx="247" cy="750" r="20" fill="#7256FF" fill-opacity=".17"/>
+  <path d="M239 746H255M239 753H251" stroke="#8B78FF" stroke-width="2.6" stroke-linecap="round"/>
+  <text x="283" y="746" fill="white" fill-opacity=".9" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="17">Давайте попробуем сделать красивое нативное приложение для Mac.</text>
+  <text x="283" y="770" fill="white" fill-opacity=".43" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13">Сегодня, 17:42 · 6 сек.</text>
+
+  <rect x="205" y="806" width="1173" height="82" rx="20" fill="white" fill-opacity=".052"/>
+  <circle cx="247" cy="847" r="20" fill="#34C6EE" fill-opacity=".14"/>
+  <path d="M239 843H255M239 850H251" stroke="#45CBEF" stroke-width="2.6" stroke-linecap="round"/>
+  <text x="283" y="843" fill="white" fill-opacity=".9" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="17">Запись сохранена, расшифровку можно повторить без новой диктовки.</text>
+  <text x="283" y="867" fill="white" fill-opacity=".43" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13">Сегодня, 17:38 · 9 сек.</text>
+
+  <g filter="url(#shadow)">
+    <rect x="505" y="38" width="590" height="76" rx="25" fill="#171526" fill-opacity=".97"/>
+    <rect x="505.5" y="38.5" width="589" height="75" rx="24.5" stroke="white" stroke-opacity=".16"/>
+  </g>
+  <circle cx="550" cy="76" r="20" fill="#7257FF" fill-opacity=".2"/>
+  <path d="M542 77H558M545 70V84M551 67V87M557 72V82" stroke="#5ED0EF" stroke-width="2.6" stroke-linecap="round"/>
+  <text x="584" y="69" fill="white" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="16" font-weight="650">Не удалось расшифровать</text>
+  <text x="584" y="91" fill="white" fill-opacity=".52" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12">Запись сохранена. Повторите запрос без новой диктовки.</text>
+  <rect x="903" y="57" width="137" height="38" rx="19" fill="#7156F5"/>
+  <text x="972" y="81" text-anchor="middle" fill="white" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" font-weight="700">↻ Повторить</text>
+  <circle cx="1062" cy="76" r="18" fill="white" fill-opacity=".09"/>
+  <path d="M1056 70L1068 82M1068 70L1056 82" stroke="white" stroke-opacity=".72" stroke-width="2" stroke-linecap="round"/>
+</svg>

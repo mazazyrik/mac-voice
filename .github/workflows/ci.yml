@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
+
+      - name: Check for committed secrets
+        run: |
+          if git grep -nE 'sk-(proj-)?[A-Za-z0-9_-]{20,}' -- ':!*.md' ':!.github/*' ':!.env.example'; then
+            echo "Possible OpenAI API key found in tracked files."
+            exit 1
+          fi
+
+      - name: Test
+        run: |
+          xcodebuild \
+            -project MacVoice.xcodeproj \
+            -scheme MacVoice \
+            -destination 'platform=macOS,arch=arm64' \
+            test CODE_SIGNING_ALLOWED=NO

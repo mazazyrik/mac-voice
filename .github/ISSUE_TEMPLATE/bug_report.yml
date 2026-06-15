@@ -1,0 +1,30 @@
+name: Bug report
+description: Report reproducible MacVoice behavior.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: Do not include API keys or private dictated text.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: MacVoice version
+    validations:
+      required: true
+  - type: input
+    id: macos
+    attributes:
+      label: macOS version and Mac model
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+    validations:
+      required: true
